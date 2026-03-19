@@ -1,9 +1,12 @@
 package org.gem.musics.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.gem.musics.domain.exceptions.NotFoundException;
 import org.gem.musics.domain.models.Album;
+import org.gem.musics.dto.album.AlbumRequest;
 import org.gem.musics.dto.album.AlbumResponse;
 import org.gem.musics.service.AlbumService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,23 +18,23 @@ public class AlbumController {
     private final AlbumService service;
 
     @PostMapping
-    public AlbumResponse addAlbum(@RequestBody Album album){
-        return null;
+    public AlbumResponse addAlbum(@RequestBody AlbumRequest album){
+        return service.addAlbum(album);
     }
     @PutMapping("/{id}")
-    public AlbumResponse updAlbum(@RequestBody Album album, @PathVariable Long id){
-        return null;
+    public AlbumResponse updAlbum(@RequestBody AlbumRequest album, @PathVariable Long id) throws NotFoundException {
+        return service.updAlbum(album, id);
     }
     @GetMapping
     public List<AlbumResponse> getAllAlbum(){
-        return null;
+        return service.getAllAlbum();
     }
     @GetMapping("/{id}")
-    public AlbumResponse getByAlbumId(@PathVariable Long id){
-        return null;
+    public AlbumResponse getByAlbumId(@PathVariable Long id) throws NotFoundException{
+        return service.getAlbumById(id);
     }
     @DeleteMapping("/{id}")
-    public void dltAlbum(@PathVariable Long id){
-
+    public HttpStatus dltAlbum(@PathVariable Long id){
+        return service.delAlbum(id);
     }
 }
