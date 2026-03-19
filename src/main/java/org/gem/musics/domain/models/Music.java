@@ -1,6 +1,6 @@
 package org.gem.musics.domain.models;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +13,20 @@ import org.gem.musics.domain.enums.Genre;
 @Setter
 @Entity
 public class Music {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private Artist artist;
+    private Long artistId;
     private int duration;
+
+    @Enumerated(EnumType.STRING)
     private Genre genre;
+
+    public Music(String title, Long artistId, int duration, Genre genre) {
+        this.title = title;
+        this.artistId = artistId;
+        this.duration = duration;
+        this.genre = genre;
+    }
 }

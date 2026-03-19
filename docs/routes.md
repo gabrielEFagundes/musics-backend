@@ -19,10 +19,7 @@
 
 /users/{id}       # Get user by ID
 
-/users?type=artist     # Gets only artists
-/users?type=listener   # Gets only users that have no musics posted
-
-/users?name={name}     # Searches by the user's name
+/users/user?name={name}     # Searches by the user's name
 ```
 
 #### Playlist
