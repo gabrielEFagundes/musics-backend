@@ -5,7 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
     @Modifying
     @Query(value = "INSERT INTO musics_playlist (id_playlist, id_music) VALUES (:idPlaylist, :idMusic)", nativeQuery = true)

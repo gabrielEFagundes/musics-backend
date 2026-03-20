@@ -12,6 +12,7 @@ import org.gem.musics.domain.enums.Genre;
 @Getter
 @Setter
 @Entity
+@Table(name = "musics")
 public class Music {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

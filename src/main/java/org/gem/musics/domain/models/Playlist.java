@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.gem.musics.domain.base.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -14,17 +15,16 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Table(name = "playlists")
 public class Playlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private List<Long> musics;
     private Long userId;
 
-    public Playlist(String title, List<Long> musics, Long userId) {
+    public Playlist(String title, Long userId) {
         this.title = title;
-        this.musics = musics;
         this.userId = userId;
     }
 }

@@ -5,5 +5,5 @@ import org.gem.musics.domain.models.Music;
 
 import java.util.List;
 
-public record PlaylistResponse(Long id, String title, List<Long> musics, Long userId) {
+public record PlaylistResponse(Long id, String title, List<Music> musics, Long userId) {
 }
