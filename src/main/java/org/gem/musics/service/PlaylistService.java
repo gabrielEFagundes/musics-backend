@@ -7,6 +7,7 @@ import org.gem.musics.domain.models.Music;
 import org.gem.musics.domain.models.Playlist;
 import org.gem.musics.dto.playlist.PlaylistRequest;
 import org.gem.musics.dto.playlist.PlaylistResponse;
+import org.gem.musics.dto.playlist.PlaylistSummaryResponse;
 import org.gem.musics.mapper.PlaylistMapper;
 import org.gem.musics.repository.MusicRepository;
 import org.gem.musics.repository.PlaylistRepository;
@@ -38,24 +39,36 @@ public class PlaylistService {
         return mapper.toResponse(p, musicList);
     }
 
+    @Transactional
     public PlaylistResponse updPlaylist(PlaylistRequest req, Long id) throws NotFoundException{
         Playlist foundPlay = repository.findById(id).orElseThrow(() -> new NotFoundException("Playlist not found!", 404));
         Playlist playlist = mapper.toEntity(req);
 
         foundPlay.setTitle(playlist.getTitle());
         foundPlay.setUserId(playlist.getUserId());
+        repository.save(foundPlay);
+
+        repository.deleteByPlaylistId(id);
+
+        req.musicIds().forEach(music -> {
+            repository.saveToMusicsPlaylist(id, music);
+        });
 
         List<Music> musicList = musicRepository.findAllById(req.musicIds());
-
-        return mapper.toResponse(repository.save(foundPlay), musicList);
+        return mapper.toResponse(foundPlay, musicList);
     }
 
-    public List<PlaylistResponse> getAllPlaylists(){
-        return mapper.toResponse(repository.findAll(), List.of());
+    public List<PlaylistSummaryResponse> getAllPlaylists(){
+        return mapper.toSumResponse(repository.findAll());
     }
 
     public PlaylistResponse getPlaylistById(Long id) throws NotFoundException{
-        return mapper.toResponse(repository.findById(id).orElseThrow(() -> new NotFoundException("Playlist not found!", 404)), List.of());
+        Playlist p = repository.findById(id).orElseThrow(() -> new NotFoundException("Playlist not found!", 404));
+
+        List<Long> musicIds = repository.findMusicIdsByPlaylistId(p.getId());
+        List<Music> musics = musicRepository.findAllById(musicIds);
+
+        return mapper.toResponse(p, musics);
     }
 
     public HttpStatus delPlaylist(Long id){

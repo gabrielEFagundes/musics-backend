@@ -20,19 +20,11 @@ public class Album {
     private Long id;
     private String title;
     private int releaseYear;
+    private Long artistId;
 
-    @ManyToOne
-    @JoinColumn(name = "artist_id")
-    private Artist artist;
-
-    @OneToMany
-    @JoinColumn(name = "id_album")
-    private List<Music> musics;
-
-    public Album(String title, int releaseYear, Artist artist, List<Music> musics) {
+    public Album(String title, int releaseYear, Long artistId) {
         this.title = title;
         this.releaseYear = releaseYear;
-        this.artist = artist;
-        this.musics = musics;
+        this.artistId = artistId;
     }
 }

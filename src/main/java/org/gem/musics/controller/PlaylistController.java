@@ -6,6 +6,7 @@ import org.gem.musics.domain.exceptions.NotFoundException;
 import org.gem.musics.domain.models.Playlist;
 import org.gem.musics.dto.playlist.PlaylistRequest;
 import org.gem.musics.dto.playlist.PlaylistResponse;
+import org.gem.musics.dto.playlist.PlaylistSummaryResponse;
 import org.gem.musics.service.PlaylistService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class PlaylistController {
     }
 
     @GetMapping
-    public List<PlaylistResponse> getAllPlayslists(){
+    public List<PlaylistSummaryResponse> getAllPlayslists(){
         return service.getAllPlaylists();
     }
 
