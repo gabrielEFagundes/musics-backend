@@ -18,7 +18,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-// TODO
 public class PlaylistService {
 
     private final PlaylistRepository repository;
@@ -40,6 +39,16 @@ public class PlaylistService {
     }
 
     @Transactional
+    public void addMusicToPlaylist(Long playlistId, Long musicId){
+        repository.saveToMusicsPlaylist(playlistId, musicId);
+    }
+
+    @Transactional
+    public void deleteMusicFromPlaylist(Long playlistId, Long musicId){
+        repository.deleteMusicFromPlaylist(musicId, playlistId);
+    }
+
+    @Transactional
     public PlaylistResponse updPlaylist(PlaylistRequest req, Long id) throws NotFoundException{
         Playlist foundPlay = repository.findById(id).orElseThrow(() -> new NotFoundException("Playlist not found!", 404));
         Playlist playlist = mapper.toEntity(req);
@@ -48,11 +57,12 @@ public class PlaylistService {
         foundPlay.setUserId(playlist.getUserId());
         repository.save(foundPlay);
 
-        repository.deleteByPlaylistId(id);
-
-        req.musicIds().forEach(music -> {
-            repository.saveToMusicsPlaylist(id, music);
-        });
+        if(!req.musicIds().isEmpty()) {
+            repository.deleteByPlaylistId(id);
+            req.musicIds().forEach(music -> {
+                repository.saveToMusicsPlaylist(id, music);
+            });
+        }
 
         List<Music> musicList = musicRepository.findAllById(req.musicIds());
         return mapper.toResponse(foundPlay, musicList);

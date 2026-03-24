@@ -85,3 +85,18 @@
 - `GET /albums` gets all the albums without their musics
 - `GET /albums/{id}` gets the specific album with all their musics
 - Musics should be added to the album with their IDs, just like Playlists
+
+---
+
+### Adding new musics to an album/playlist
+
+In terms of adding musics to albums or playlists, we'll need a dedicated endpoint, which could be something like `POST /playlists/{id}/musics/{musidId}`
+
+This would add a music to the specified playlist, instead of updating it everytime.
+
+Thinking about it, we should even stop messing with the musics on the update and pass this task to the specified endpoint, that would make things way clearer and even faster, since it wouldn't have to remove and add all of the entries from the `musics_playlist` or `musics_album` every update.
+
+Also:
+
+- Trying to add musics that doesn't exist on the database does not work, simply nothing happens if you try.
+  - Though we could return something like an error.

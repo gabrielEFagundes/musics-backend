@@ -24,6 +24,16 @@ public class PlaylistController {
         return service.addPlaylist(play);
     }
 
+    @PostMapping("/{id}/musics/{musicId}")
+    public void addMusicToPlaylist(@PathVariable Long id, @PathVariable Long musicId){
+        service.addMusicToPlaylist(id, musicId);
+    }
+
+    @DeleteMapping("/{id}/musics/{musicId}")
+    public void deleteMusicFromPlaylist(@PathVariable Long id, @PathVariable Long musicId){
+        service.deleteMusicFromPlaylist(id, musicId);
+    }
+
     @PutMapping("/{id}")
     public PlaylistResponse updPlay(@RequestBody PlaylistRequest play, @PathVariable Long id) throws Exception {
         return service.updPlaylist(play, id);
@@ -35,7 +45,7 @@ public class PlaylistController {
     }
 
     @GetMapping("/{id}")
-    public PlaylistResponse getByPlayId(@PathVariable Long id) throws Exception{
+    public PlaylistResponse getByPlayId(@PathVariable Long id) throws Exception {
         return service.getPlaylistById(id);
     }
 

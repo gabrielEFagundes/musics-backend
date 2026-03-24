@@ -16,6 +16,10 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
     @Query(value = "INSERT INTO musics_album (id_album, id_music) VALUES (:albumId, :musicId)", nativeQuery = true)
     void saveToMusicsAlbum(@Param("albumId") Long albumId, @Param("musicId") Long musicId);
 
+    @Modifying
+    @Query(value = "DELETE FROM musics_album WHERE id_music = :idMusic AND id_album = :idAlbum", nativeQuery = true)
+    void deleteMusicFromAlbum(@Param("idMusic") Long idMusic, @Param("idAlbum") Long idAlbum);
+
     @Query(value = "SELECT id_music FROM musics_album WHERE id_album = :albumId", nativeQuery = true)
     List<Long> findMusicIdsByAlbumId(@Param("albumId") Long id);
 

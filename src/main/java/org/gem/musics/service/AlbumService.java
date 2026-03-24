@@ -38,6 +38,16 @@ public class AlbumService {
     }
 
     @Transactional
+    public void addMusicToAlbum(Long albumId, Long musicId){
+        repository.saveToMusicsAlbum(albumId, musicId);
+    }
+
+    @Transactional
+    public void deleteMusicFromAlbum(Long albumId, Long musicId){
+        repository.deleteMusicFromAlbum(musicId, albumId);
+    }
+
+    @Transactional
     public AlbumResponse updAlbum(AlbumRequest req, Long id) throws NotFoundException{
         Album foundAlbum = repository.findById(id).orElseThrow(() -> new NotFoundException("Album not found!", 404));
         Album album = mapper.toEntity(req);
@@ -46,11 +56,12 @@ public class AlbumService {
         foundAlbum.setTitle(album.getTitle());
         repository.save(foundAlbum);
 
-        repository.deleteByAlbumId(id);
-
-        req.musicIds().forEach(music -> {
-            repository.saveToMusicsAlbum(id, music);
-        });
+        if(!req.musicIds().isEmpty()) {
+            repository.deleteByAlbumId(id);
+            req.musicIds().forEach(music -> {
+                repository.saveToMusicsAlbum(id, music);
+            });
+        }
 
         List<Music> musicList = musicRepository.findAllById(req.musicIds());
         return mapper.toResponse(foundAlbum, musicList);

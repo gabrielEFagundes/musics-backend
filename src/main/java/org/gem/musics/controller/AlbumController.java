@@ -22,6 +22,17 @@ public class AlbumController {
     public AlbumResponse addAlbum(@RequestBody AlbumRequest album){
         return service.addAlbum(album);
     }
+
+    @PostMapping("/{id}/musics/{musicId}")
+    public void addMusicToAlbum(@PathVariable Long id, @PathVariable Long musicId){
+        service.addMusicToAlbum(id, musicId);
+    }
+
+    @DeleteMapping("/{id}/musics/{musicId}")
+    public void deleteMusicFromAlbum(@PathVariable Long id, @PathVariable Long musicId){
+        service.deleteMusicFromAlbum(id, musicId);
+    }
+
     @PutMapping("/{id}")
     public AlbumResponse updAlbum(@RequestBody AlbumRequest album, @PathVariable Long id) throws NotFoundException {
         return service.updAlbum(album, id);
