@@ -1,4 +1,6 @@
 package org.gem.musics.dto.user;
 
-public record UserRequest() {
+import java.sql.Date;
+
+public record UserRequest(String name, Date loginDate) {
 }
