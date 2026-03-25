@@ -28,7 +28,7 @@ public class MusicService {
     }
 
     public MusicResponse updMusic(MusicRequest req, Long id) throws NotFoundException{
-        Music foundMsc = repository.findById(id).orElseThrow(() -> new NotFoundException("Music not found!", 404));
+        Music foundMsc = repository.findById(id).orElseThrow(() -> new NotFoundException("Music not found!"));
         Music music = mapper.toEntity(req);
 
         foundMsc.setArtistId(music.getArtistId());
@@ -40,7 +40,11 @@ public class MusicService {
     }
 
     public MusicResponse getMusicById(Long id) throws NotFoundException{
-        return mapper.toResponse(repository.findById(id).orElseThrow(() -> new NotFoundException("Music not found!", 404)));
+        return mapper.toResponse(repository.findById(id).orElseThrow(() -> new NotFoundException("Music not found!")));
+    }
+
+    public MusicResponse getMusicByName(String name) throws NotFoundException{
+        return mapper.toResponse(repository.findByTitle(name).orElseThrow(() -> new NotFoundException("Music not found!")));
     }
 
     public List<MusicResponse> getAllMusics(){

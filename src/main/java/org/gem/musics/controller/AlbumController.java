@@ -24,27 +24,35 @@ public class AlbumController {
     }
 
     @PostMapping("/{id}/musics/{musicId}")
-    public void addMusicToAlbum(@PathVariable Long id, @PathVariable Long musicId){
-        service.addMusicToAlbum(id, musicId);
+    public AlbumResponse addMusicToAlbum(@PathVariable Long id, @PathVariable Long musicId) throws Exception {
+        return service.addMusicToAlbum(id, musicId);
     }
 
     @DeleteMapping("/{id}/musics/{musicId}")
-    public void deleteMusicFromAlbum(@PathVariable Long id, @PathVariable Long musicId){
+    public void deleteMusicFromAlbum(@PathVariable Long id, @PathVariable Long musicId) throws Exception {
         service.deleteMusicFromAlbum(id, musicId);
     }
 
     @PutMapping("/{id}")
-    public AlbumResponse updAlbum(@RequestBody AlbumRequest album, @PathVariable Long id) throws NotFoundException {
+    public AlbumResponse updAlbum(@RequestBody AlbumRequest album, @PathVariable Long id) throws Exception {
         return service.updAlbum(album, id);
     }
+
     @GetMapping
     public List<AlbumSummaryResponse> getAllAlbum(){
         return service.getAllAlbum();
     }
+
     @GetMapping("/{id}")
-    public AlbumResponse getByAlbumId(@PathVariable Long id) throws NotFoundException{
+    public AlbumResponse getByAlbumId(@PathVariable Long id) throws Exception{
         return service.getAlbumById(id);
     }
+
+    @GetMapping("/album")
+    public List<AlbumSummaryResponse> getByAlbumName(@RequestParam("title") String name) throws Exception{
+        return service.getAlbumByName(name);
+    }
+
     @DeleteMapping("/{id}")
     public HttpStatus dltAlbum(@PathVariable Long id){
         return service.delAlbum(id);

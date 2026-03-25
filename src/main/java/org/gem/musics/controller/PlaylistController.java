@@ -25,12 +25,12 @@ public class PlaylistController {
     }
 
     @PostMapping("/{id}/musics/{musicId}")
-    public void addMusicToPlaylist(@PathVariable Long id, @PathVariable Long musicId){
-        service.addMusicToPlaylist(id, musicId);
+    public PlaylistResponse addMusicToPlaylist(@PathVariable Long id, @PathVariable Long musicId) throws Exception {
+        return service.addMusicToPlaylist(id, musicId);
     }
 
     @DeleteMapping("/{id}/musics/{musicId}")
-    public void deleteMusicFromPlaylist(@PathVariable Long id, @PathVariable Long musicId){
+    public void deleteMusicFromPlaylist(@PathVariable Long id, @PathVariable Long musicId) throws Exception {
         service.deleteMusicFromPlaylist(id, musicId);
     }
 
@@ -47,6 +47,16 @@ public class PlaylistController {
     @GetMapping("/{id}")
     public PlaylistResponse getByPlayId(@PathVariable Long id) throws Exception {
         return service.getPlaylistById(id);
+    }
+
+    /* TODO:
+        we have to sort a way of getting the values that are approximated to the user's query,
+        so if they search, for example, "Sad p", it should return all of the playlists with a similar combination of characters.
+        @gabrielEFagundes and @Matheus089107 are responsible for this.
+     */
+    @GetMapping("/playlist")
+    public List<PlaylistSummaryResponse> getByPlaylistName(@RequestParam("title") String name) throws Exception {
+        return service.getPlaylistByName(name);
     }
 
     @DeleteMapping("/{id}")

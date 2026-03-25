@@ -38,18 +38,29 @@ public class AlbumService {
     }
 
     @Transactional
-    public void addMusicToAlbum(Long albumId, Long musicId){
+    public AlbumResponse addMusicToAlbum(Long albumId, Long musicId) throws NotFoundException {
+        if(musicRepository.existsById(musicId)){
+            throw new NotFoundException("Music doesn't exists!");
+        }
         repository.saveToMusicsAlbum(albumId, musicId);
+
+        Album a = repository.findById(albumId).orElseThrow(() -> new NotFoundException("Album doesn't exists!"));
+        List<Music> musicList = musicRepository.findAllById(repository.findMusicIdsByAlbumId(musicId));
+
+        return mapper.toResponse(a, musicList);
     }
 
     @Transactional
-    public void deleteMusicFromAlbum(Long albumId, Long musicId){
+    public void deleteMusicFromAlbum(Long albumId, Long musicId) throws NotFoundException {
+        if(!musicRepository.existsById(musicId)){
+            throw new NotFoundException("Music doesn't exists!");
+        }
         repository.deleteMusicFromAlbum(musicId, albumId);
     }
 
     @Transactional
     public AlbumResponse updAlbum(AlbumRequest req, Long id) throws NotFoundException{
-        Album foundAlbum = repository.findById(id).orElseThrow(() -> new NotFoundException("Album not found!", 404));
+        Album foundAlbum = repository.findById(id).orElseThrow(() -> new NotFoundException("Album not found!"));
         Album album = mapper.toEntity(req);
 
         foundAlbum.setArtistId(album.getArtistId());
@@ -71,8 +82,12 @@ public class AlbumService {
         return mapper.toResponse(repository.findAll());
     }
 
+    public List<AlbumSummaryResponse> getAlbumByName(String name) throws NotFoundException{
+        return mapper.toResponse(repository.findByTitle(name));
+    }
+
     public AlbumResponse getAlbumById(Long id) throws NotFoundException{
-        Album a = repository.findById(id).orElseThrow(() -> new NotFoundException("Album not found", 404));
+        Album a = repository.findById(id).orElseThrow(() -> new NotFoundException("Album not found"));
 
         List<Long> musicIds = repository.findMusicIdsByAlbumId(a.getId());
         List<Music> musics = musicRepository.findAllById(musicIds);
