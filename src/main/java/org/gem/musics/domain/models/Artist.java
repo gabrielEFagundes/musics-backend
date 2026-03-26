@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.gem.musics.domain.base.User;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +21,7 @@ public class Artist extends User {
     private Long monthlyListeners;
     private String description;
 
-    public Artist(String name, Date loginDate, String artisticName, Long monthlyListeners, String description) {
+    public Artist(String name, LocalDateTime loginDate, String artisticName, Long monthlyListeners, String description) {
         super(name, loginDate);
         this.artisticName = artisticName;
         this.monthlyListeners = monthlyListeners;
