@@ -24,6 +24,9 @@ public class Music {
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
+    @Column(name = "cover_image_url")
+    private String coverImageUrl;
+
     public Music(String title, Long artistId, int duration, Genre genre) {
         this.title = title;
         this.artistId = artistId;

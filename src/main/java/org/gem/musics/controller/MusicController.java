@@ -36,6 +36,11 @@ public class MusicController {
         return service.getMusicById(id);
     }
 
+    @GetMapping("/music")
+    public MusicResponse getByMscName(@RequestParam("title") String name) throws Exception{
+        return service.getMusicByName(name);
+    }
+
     @DeleteMapping("/{id}")
     public HttpStatus dltMsc(@PathVariable Long id){
         return service.delMusic(id);

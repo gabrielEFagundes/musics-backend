@@ -28,7 +28,7 @@ public class UserService {
     }
 
     public UserResponse updUser(UserRequest u, Long id) throws NotFoundException{
-        User foundUsr = repository.findById(id).orElseThrow(() -> new NotFoundException("User not found!", 404));
+        User foundUsr = repository.findById(id).orElseThrow(() -> new NotFoundException("User not found!"));
         User user = mapper.toEntity(u);
 
         foundUsr.setName(user.getName());
@@ -42,11 +42,11 @@ public class UserService {
     }
 
     public UserResponse getUserById(Long id) throws NotFoundException{
-        return mapper.toResponse(repository.findById(id).orElseThrow(() -> new NotFoundException("User not found!", 404)));
+        return mapper.toResponse(repository.findById(id).orElseThrow(() -> new NotFoundException("User not found!")));
     }
 
     public UserResponse getUserByName(String name) throws NotFoundException{
-        return mapper.toResponse(repository.findByName(name).orElseThrow(() -> new NotFoundException("User not found!", 404)));
+        return mapper.toResponse(repository.findByName(name).orElseThrow(() -> new NotFoundException("User not found!")));
     }
 
     public HttpStatus delUser(Long id){
