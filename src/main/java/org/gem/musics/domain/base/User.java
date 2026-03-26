@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -21,12 +23,12 @@ public class User {
     private String name;
 
     @Column(name = "created_at")
-    private Date loginDate;
+    private LocalDateTime loginDate;
 
     @Column(name = "profile_picture_url")
     private String profilePictureUrl;
 
-    public User(String name, Date loginDate) {
+    public User(String name, LocalDateTime loginDate) {
         this.name = name;
         this.loginDate = loginDate;
     }
