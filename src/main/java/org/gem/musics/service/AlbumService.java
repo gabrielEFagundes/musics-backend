@@ -51,11 +51,16 @@ public class AlbumService {
     }
 
     @Transactional
-    public void deleteMusicFromAlbum(Long albumId, Long musicId) throws NotFoundException {
+    public AlbumResponse deleteMusicFromAlbum(Long albumId, Long musicId) throws NotFoundException {
         if(!musicRepository.existsById(musicId)){
             throw new NotFoundException("Music doesn't exists!");
         }
         repository.deleteMusicFromAlbum(musicId, albumId);
+
+        Album a = repository.findById(albumId).orElseThrow(() -> new NotFoundException("Album doesn't exists!"));
+        List<Music> musicList = musicRepository.findAllById(repository.findMusicIdsByAlbumId(musicId));
+
+        return mapper.toResponse(a, musicList);
     }
 
     @Transactional

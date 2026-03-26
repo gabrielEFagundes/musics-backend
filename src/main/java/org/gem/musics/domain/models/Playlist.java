@@ -23,6 +23,9 @@ public class Playlist {
     private String title;
     private Long userId;
 
+    @Column(name = "cover_image_url")
+    private String coverImageUrl;
+
     public Playlist(String title, Long userId) {
         this.title = title;
         this.userId = userId;

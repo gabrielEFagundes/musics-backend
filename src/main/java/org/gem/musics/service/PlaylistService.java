@@ -52,11 +52,16 @@ public class PlaylistService {
     }
 
     @Transactional
-    public void deleteMusicFromPlaylist(Long playlistId, Long musicId) throws NotFoundException {
+    public PlaylistResponse deleteMusicFromPlaylist(Long playlistId, Long musicId) throws NotFoundException {
         if(!musicRepository.existsById(musicId)){
             throw new NotFoundException("Music doesn't exists!");
         }
         repository.deleteMusicFromPlaylist(musicId, playlistId);
+
+        Playlist p = repository.findById(playlistId).orElseThrow(() -> new NotFoundException("Playlist doesn't exists!"));
+        List<Music> musicList = musicRepository.findAllById(repository.findMusicIdsByPlaylistId(musicId));
+
+        return mapper.toResponse(p, musicList);
     }
 
     @Transactional

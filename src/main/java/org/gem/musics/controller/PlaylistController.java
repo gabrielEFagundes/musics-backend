@@ -30,8 +30,8 @@ public class PlaylistController {
     }
 
     @DeleteMapping("/{id}/musics/{musicId}")
-    public void deleteMusicFromPlaylist(@PathVariable Long id, @PathVariable Long musicId) throws Exception {
-        service.deleteMusicFromPlaylist(id, musicId);
+    public PlaylistResponse deleteMusicFromPlaylist(@PathVariable Long id, @PathVariable Long musicId) throws Exception {
+        return service.deleteMusicFromPlaylist(id, musicId);
     }
 
     @PutMapping("/{id}")

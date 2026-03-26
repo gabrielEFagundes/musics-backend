@@ -29,8 +29,8 @@ public class AlbumController {
     }
 
     @DeleteMapping("/{id}/musics/{musicId}")
-    public void deleteMusicFromAlbum(@PathVariable Long id, @PathVariable Long musicId) throws Exception {
-        service.deleteMusicFromAlbum(id, musicId);
+    public AlbumResponse deleteMusicFromAlbum(@PathVariable Long id, @PathVariable Long musicId) throws Exception {
+        return service.deleteMusicFromAlbum(id, musicId);
     }
 
     @PutMapping("/{id}")
