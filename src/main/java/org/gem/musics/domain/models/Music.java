@@ -27,10 +27,11 @@ public class Music {
     @Column(name = "cover_image_url")
     private String coverImageUrl;
 
-    public Music(String title, Long artistId, int duration, Genre genre) {
+    public Music(String title, Long artistId, int duration, Genre genre, String coverImageUrl) {
         this.title = title;
         this.artistId = artistId;
         this.duration = duration;
         this.genre = genre;
+        this.coverImageUrl = coverImageUrl;
     }
 }

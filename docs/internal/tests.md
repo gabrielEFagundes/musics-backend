@@ -3,6 +3,7 @@
 ```json
 {
   "name": "Gabriel",
+  "profilePictureUrl": "https://images.unsplash.com/vector-1742875355318-00d715aec3e8?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 }
 ```
 
@@ -24,21 +25,24 @@
     "title": "Notion",
     "artistId": 2,
     "duration": 123,
-    "genre": "POP"
+    "genre": "POP",
+    "coverImageUrl": "https://singlecolorimage.com/get/33fd8f/800x800.png"
 }
 
 {
   "title": "Sailor Song",
   "artistId": 2,
   "duration": 145,
-  "genre": "CLASSIC_JAZZ"
+  "genre": "CLASSIC_JAZZ",
+  "coverImageUrl": "https://singlecolorimage.com/get/ff85a9/800x800.png"
 }
 
 {
   "title": "Goodbye to a World",
   "artistId": 2,
   "duration": 231,
-  "genre": "ROCK"
+  "genre": "ROCK",
+  "coverImageUrl": "https://singlecolorimage.com/get/41427a/800x800.png"
 }
 ```
 

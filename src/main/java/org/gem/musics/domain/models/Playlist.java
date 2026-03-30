@@ -26,8 +26,9 @@ public class Playlist {
     @Column(name = "cover_image_url")
     private String coverImageUrl;
 
-    public Playlist(String title, Long userId) {
+    public Playlist(String title, Long userId, String coverImageUrl) {
         this.title = title;
         this.userId = userId;
+        this.coverImageUrl = coverImageUrl;
     }
 }

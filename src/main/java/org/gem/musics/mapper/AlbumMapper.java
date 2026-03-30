@@ -14,15 +14,15 @@ import java.util.List;
 public class AlbumMapper {
 
     public Album toEntity(AlbumRequest req){
-        return new Album(req.title(), req.releaseYear(), req.artistId());
+        return new Album(req.title(), req.releaseYear(), req.artistId(), req.coverImageUrl());
     }
 
     public AlbumResponse toResponse(Album a, List<Music> ms) {
-        return new AlbumResponse(a.getId(), a.getTitle(), a.getReleaseYear(), a.getArtistId(), ms);
+        return new AlbumResponse(a.getId(), a.getTitle(), a.getReleaseYear(), a.getArtistId(), ms, a.getCoverImageUrl());
     }
 
     public AlbumSummaryResponse toSumResponse(Album a){
-        return new AlbumSummaryResponse(a.getId(), a.getTitle(), a.getReleaseYear(), a.getArtistId());
+        return new AlbumSummaryResponse(a.getId(), a.getTitle(), a.getReleaseYear(), a.getArtistId(), a.getCoverImageUrl());
     }
 
     public List<AlbumSummaryResponse> toResponse(List<Album> as){

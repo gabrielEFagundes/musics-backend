@@ -16,7 +16,7 @@ public class UserMapper {
     }
 
     public UserResponse toResponse(User u){
-        return new UserResponse(u.getId(), u.getName(), u.getLoginDate());
+        return new UserResponse(u.getId(), u.getName(), u.getLoginDate(), u.getProfilePictureUrl());
     }
 
     public List<UserResponse> toResponse(List<User> us){

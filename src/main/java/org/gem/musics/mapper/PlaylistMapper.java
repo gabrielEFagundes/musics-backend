@@ -14,15 +14,15 @@ import java.util.List;
 public class PlaylistMapper {
 
     public Playlist toEntity(PlaylistRequest req){
-        return new Playlist(req.title(), req.userId());
+        return new Playlist(req.title(), req.userId(), req.coverImageUrl());
     }
 
     public PlaylistResponse toResponse(Playlist p, List<Music> musics){
-        return new PlaylistResponse(p.getId(), p.getTitle(), musics, p.getUserId());
+        return new PlaylistResponse(p.getId(), p.getTitle(), musics, p.getUserId(), p.getCoverImageUrl());
     }
 
     public PlaylistSummaryResponse toSumResponse(Playlist p){
-        return new PlaylistSummaryResponse(p.getId(), p.getTitle(), p.getUserId());
+        return new PlaylistSummaryResponse(p.getId(), p.getTitle(), p.getUserId(), p.getCoverImageUrl());
     }
 
     public List<PlaylistSummaryResponse> toSumResponse(List<Playlist> ps){

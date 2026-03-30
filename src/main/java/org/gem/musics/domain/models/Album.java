@@ -25,9 +25,10 @@ public class Album {
     @Column(name = "cover_image_url")
     private String coverImageUrl;
 
-    public Album(String title, int releaseYear, Long artistId) {
+    public Album(String title, int releaseYear, Long artistId, String coverImageUrl) {
         this.title = title;
         this.releaseYear = releaseYear;
         this.artistId = artistId;
+        this.coverImageUrl = coverImageUrl;
     }
 }
