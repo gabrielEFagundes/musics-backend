@@ -27,8 +27,9 @@ public class User {
     @Column(name = "profile_picture_url")
     private String profilePictureUrl;
 
-    public User(String name) {
+    public User(String name, String profilePictureUrl) {
         this.name = name;
+        this.profilePictureUrl = profilePictureUrl;
     }
 }
 

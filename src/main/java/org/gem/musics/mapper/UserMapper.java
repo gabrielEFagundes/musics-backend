@@ -12,7 +12,7 @@ import java.util.List;
 public class UserMapper {
 
     public User toEntity(UserRequest req){
-        return new User(req.name());
+        return new User(req.name(), req.profilePictureUrl());
     }
 
     public UserResponse toResponse(User u){
