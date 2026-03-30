@@ -10,6 +10,7 @@ import org.gem.musics.repository.ArtistRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -20,11 +21,10 @@ public class ArtistService {
     private final ArtistMapper mapper;
 
     public ArtistResponse addArtist(ArtistRequest req){
-        return mapper.toResponse(
-                repository.save(
-                        mapper.toEntity(req)
-                )
-        );
+        Artist a = mapper.toEntity(req);
+
+        a.setLoginDate(LocalDate.now());
+        return mapper.toResponse(repository.save(a));
     }
 
     public ArtistResponse updArtist(ArtistRequest req, Long id) throws NotFoundException{

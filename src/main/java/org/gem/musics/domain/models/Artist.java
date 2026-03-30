@@ -20,8 +20,8 @@ public class Artist extends User {
     private Long monthlyListeners;
     private String description;
 
-    public Artist(String name, Date loginDate, String artisticName, Long monthlyListeners, String description) {
-        super(name, loginDate);
+    public Artist(String name, String artisticName, Long monthlyListeners, String description) {
+        super(name);
         this.artisticName = artisticName;
         this.monthlyListeners = monthlyListeners;
         this.description = description;

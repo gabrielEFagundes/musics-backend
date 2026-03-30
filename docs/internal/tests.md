@@ -3,7 +3,6 @@
 ```json
 {
   "name": "Gabriel",
-  "loginDate": "2026-03-23"
 }
 ```
 
@@ -12,7 +11,6 @@
 ```json
 {
   "name": "Matheus",
-  "loginDate": "2026-03-23",
   "artisticName": "gabsDaCoder",
   "monthlyListeners": 7919299,
   "description": "I'm sure there won't always be sunshine..."

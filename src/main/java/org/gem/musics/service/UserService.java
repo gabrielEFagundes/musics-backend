@@ -10,6 +10,7 @@ import org.gem.musics.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -20,11 +21,10 @@ public class UserService {
     private final UserMapper mapper;
 
     public UserResponse addUser(UserRequest u){
-        return mapper.toResponse(
-                repository.save(
-                        mapper.toEntity(u)
-                )
-        );
+        User user = mapper.toEntity(u);
+
+        user.setLoginDate(LocalDate.now());
+        return mapper.toResponse(repository.save(user));
     }
 
     public UserResponse updUser(UserRequest u, Long id) throws NotFoundException{

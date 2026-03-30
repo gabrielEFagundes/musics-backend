@@ -12,7 +12,7 @@ import java.util.List;
 public class ArtistMapper {
 
     public Artist toEntity(ArtistRequest req){
-        return new Artist(req.name(), req.loginDate(), req.artisticName(), req.monthlyListeners(), req.description());
+        return new Artist(req.name(), req.artisticName(), req.monthlyListeners(), req.description());
     }
 
     public ArtistResponse toResponse(Artist a){
