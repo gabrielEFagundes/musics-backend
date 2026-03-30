@@ -1,0 +1,27 @@
+# Standard Ignore
+target/
+build/
+out/
+.gradle/
+.mvn/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.factorypath
+.springBeans
+.sts4-cache
+
+# Fly/System
+fly.toml
+.git
+.gitignore
+Dockerfile
+.dockerignore
+**/HELP.md

@@ -24,10 +24,14 @@ public class Music {
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
-    public Music(String title, Long artistId, int duration, Genre genre) {
+    @Column(name = "cover_image_url")
+    private String coverImageUrl;
+
+    public Music(String title, Long artistId, int duration, Genre genre, String coverImageUrl) {
         this.title = title;
         this.artistId = artistId;
         this.duration = duration;
         this.genre = genre;
+        this.coverImageUrl = coverImageUrl;
     }
 }

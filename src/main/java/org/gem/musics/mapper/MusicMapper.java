@@ -12,11 +12,11 @@ import java.util.List;
 public class MusicMapper {
 
     public Music toEntity(MusicRequest req){
-        return new Music(req.title(), req.artistId(), req.duration(), req.genre());
+        return new Music(req.title(), req.artistId(), req.duration(), req.genre(), req.coverImageUrl());
     }
 
     public MusicResponse toResponse(Music m){
-        return new MusicResponse(m.getId(), m.getTitle(), m.getArtistId(), m.getDuration(), m.getGenre());
+        return new MusicResponse(m.getId(), m.getTitle(), m.getArtistId(), m.getDuration(), m.getGenre(), m.getCoverImageUrl());
     }
 
     public List<MusicResponse> toResponse(List<Music> ms){

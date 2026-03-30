@@ -12,11 +12,11 @@ import java.util.List;
 public class UserMapper {
 
     public User toEntity(UserRequest req){
-        return new User(req.name(), req.loginDate());
+        return new User(req.name(), req.profilePictureUrl());
     }
 
     public UserResponse toResponse(User u){
-        return new UserResponse(u.getId(), u.getName(), u.getLoginDate());
+        return new UserResponse(u.getId(), u.getName(), u.getLoginDate(), u.getProfilePictureUrl());
     }
 
     public List<UserResponse> toResponse(List<User> us){

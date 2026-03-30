@@ -3,7 +3,7 @@
 ```json
 {
   "name": "Gabriel",
-  "loginDate": "2026-03-23"
+  "profilePictureUrl": "https://images.unsplash.com/vector-1742875355318-00d715aec3e8?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 }
 ```
 
@@ -12,7 +12,6 @@
 ```json
 {
   "name": "Matheus",
-  "loginDate": "2026-03-23",
   "artisticName": "gabsDaCoder",
   "monthlyListeners": 7919299,
   "description": "I'm sure there won't always be sunshine..."
@@ -26,21 +25,24 @@
     "title": "Notion",
     "artistId": 2,
     "duration": 123,
-    "genre": "POP"
+    "genre": "POP",
+    "coverImageUrl": "https://singlecolorimage.com/get/33fd8f/800x800.png"
 }
 
 {
   "title": "Sailor Song",
   "artistId": 2,
   "duration": 145,
-  "genre": "CLASSIC_JAZZ"
+  "genre": "CLASSIC_JAZZ",
+  "coverImageUrl": "https://singlecolorimage.com/get/ff85a9/800x800.png"
 }
 
 {
   "title": "Goodbye to a World",
   "artistId": 2,
   "duration": 231,
-  "genre": "ROCK"
+  "genre": "ROCK",
+  "coverImageUrl": "https://singlecolorimage.com/get/41427a/800x800.png"
 }
 ```
 
@@ -100,3 +102,15 @@ Also:
 
 - Trying to add musics that doesn't exist on the database does not work, simply nothing happens if you try.
   - Though we could return something like an error.
+
+### Searching
+
+The searching methods are quite confusing, but they can be sorted out pretty easily.
+
+We have both `GET /playlists/{id}` and `GET /playlists/{name}`, same for albums.
+
+The user will NEVER use the search by ID endpoint, we'll only use that endpoint for **showing the specific playlist/album to the user**, that by returning the playlist with its corresponding musics.
+
+The user will simply search for the playlists or albums through the search by name endpoint, and when he clicks a playlist or album, it will enter on its page and show its information.
+
+Hopefully this makes things clearer for all of us.

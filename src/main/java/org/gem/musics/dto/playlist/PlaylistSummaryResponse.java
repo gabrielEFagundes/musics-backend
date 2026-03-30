@@ -1,4 +1,4 @@
 package org.gem.musics.dto.playlist;
 
-public record PlaylistSummaryResponse(Long id, String title, Long userId) {
+public record PlaylistSummaryResponse(Long id, String title, Long userId, String coverImageUrl) {
 }

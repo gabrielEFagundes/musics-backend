@@ -23,8 +23,12 @@ public class Playlist {
     private String title;
     private Long userId;
 
-    public Playlist(String title, Long userId) {
+    @Column(name = "cover_image_url")
+    private String coverImageUrl;
+
+    public Playlist(String title, Long userId, String coverImageUrl) {
         this.title = title;
         this.userId = userId;
+        this.coverImageUrl = coverImageUrl;
     }
 }

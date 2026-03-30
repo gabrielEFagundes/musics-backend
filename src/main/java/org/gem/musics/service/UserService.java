@@ -10,6 +10,7 @@ import org.gem.musics.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -20,15 +21,14 @@ public class UserService {
     private final UserMapper mapper;
 
     public UserResponse addUser(UserRequest u){
-        return mapper.toResponse(
-                repository.save(
-                        mapper.toEntity(u)
-                )
-        );
+        User user = mapper.toEntity(u);
+
+        user.setLoginDate(LocalDate.now());
+        return mapper.toResponse(repository.save(user));
     }
 
     public UserResponse updUser(UserRequest u, Long id) throws NotFoundException{
-        User foundUsr = repository.findById(id).orElseThrow(() -> new NotFoundException("User not found!", 404));
+        User foundUsr = repository.findById(id).orElseThrow(() -> new NotFoundException("User not found!"));
         User user = mapper.toEntity(u);
 
         foundUsr.setName(user.getName());
@@ -42,11 +42,11 @@ public class UserService {
     }
 
     public UserResponse getUserById(Long id) throws NotFoundException{
-        return mapper.toResponse(repository.findById(id).orElseThrow(() -> new NotFoundException("User not found!", 404)));
+        return mapper.toResponse(repository.findById(id).orElseThrow(() -> new NotFoundException("User not found!")));
     }
 
     public UserResponse getUserByName(String name) throws NotFoundException{
-        return mapper.toResponse(repository.findByName(name).orElseThrow(() -> new NotFoundException("User not found!", 404)));
+        return mapper.toResponse(repository.findByName(name).orElseThrow(() -> new NotFoundException("User not found!")));
     }
 
     public HttpStatus delUser(Long id){

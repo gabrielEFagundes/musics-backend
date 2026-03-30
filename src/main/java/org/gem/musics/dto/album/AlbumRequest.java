@@ -1,13 +1,10 @@
 package org.gem.musics.dto.album;
 
-import org.gem.musics.domain.models.Artist;
-import org.gem.musics.domain.models.Music;
-
-import java.sql.Date;
 import java.util.List;
 
-public record AlbumRequest(String title, int releaseYear, Long artistId, List<Long> musicIds) {
+public record AlbumRequest(String title, int releaseYear, Long artistId, List<Long> musicIds, String coverImageUrl) {
     public AlbumRequest {
         if(musicIds == null) musicIds = List.of();
+        if(coverImageUrl == null || coverImageUrl.isEmpty()) coverImageUrl = "https://placehold.co/800?text=Album+Cover&font=roboto";
     }
 }
