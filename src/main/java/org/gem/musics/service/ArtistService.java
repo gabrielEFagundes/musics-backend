@@ -28,7 +28,7 @@ public class ArtistService {
     }
 
     public ArtistResponse updArtist(ArtistRequest req, Long id) throws NotFoundException{
-        Artist foundArt = repository.findById(id).orElseThrow(() -> new NotFoundException("Artist not found!", 404));
+        Artist foundArt = repository.findById(id).orElseThrow(() -> new NotFoundException("Artist not found!"));
         Artist artist = mapper.toEntity(req);
 
         foundArt.setName(artist.getName());
@@ -41,7 +41,7 @@ public class ArtistService {
     }
 
     public ArtistResponse getArtistById(Long id) throws NotFoundException{
-        return mapper.toResponse(repository.findById(id).orElseThrow(() -> new NotFoundException("Artist not found!", 404)));
+        return mapper.toResponse(repository.findById(id).orElseThrow(() -> new NotFoundException("Artist not found!")));
     }
 
     public List<ArtistResponse> getAllArtists(){

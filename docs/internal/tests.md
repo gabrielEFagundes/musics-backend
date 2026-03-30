@@ -98,3 +98,15 @@ Also:
 
 - Trying to add musics that doesn't exist on the database does not work, simply nothing happens if you try.
   - Though we could return something like an error.
+
+### Searching
+
+The searching methods are quite confusing, but they can be sorted out pretty easily.
+
+We have both `GET /playlists/{id}` and `GET /playlists/{name}`, same for albums.
+
+The user will NEVER use the search by ID endpoint, we'll only use that endpoint for **showing the specific playlist/album to the user**, that by returning the playlist with its corresponding musics.
+
+The user will simply search for the playlists or albums through the search by name endpoint, and when he clicks a playlist or album, it will enter on its page and show its information.
+
+Hopefully this makes things clearer for all of us.

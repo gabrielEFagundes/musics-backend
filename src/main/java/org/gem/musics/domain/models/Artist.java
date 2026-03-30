@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.gem.musics.domain.base.User;
 
-import java.sql.Date;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

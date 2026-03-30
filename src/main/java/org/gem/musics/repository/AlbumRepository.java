@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AlbumRepository extends JpaRepository<Album, Long> {
@@ -26,4 +27,6 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
     @Modifying
     @Query(value = "DELETE FROM musics_album WHERE id_album = :albumId", nativeQuery = true)
     void deleteByAlbumId(@Param("albumId") Long albumId);
+
+    List<Album> findByTitle(String title);
 }

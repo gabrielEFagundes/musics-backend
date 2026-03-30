@@ -39,18 +39,34 @@ public class PlaylistService {
     }
 
     @Transactional
-    public void addMusicToPlaylist(Long playlistId, Long musicId){
+    public PlaylistResponse addMusicToPlaylist(Long playlistId, Long musicId) throws NotFoundException{
+        if(!musicRepository.existsById(musicId)){
+            throw new NotFoundException("Music doesn't exists!");
+        }
         repository.saveToMusicsPlaylist(playlistId, musicId);
+
+        Playlist p = repository.findById(playlistId).orElseThrow(() -> new NotFoundException("Playlist doesn't exists!"));
+        List<Music> musicList = musicRepository.findAllById(repository.findMusicIdsByPlaylistId(playlistId));
+
+        return mapper.toResponse(p, musicList);
     }
 
     @Transactional
-    public void deleteMusicFromPlaylist(Long playlistId, Long musicId){
+    public PlaylistResponse deleteMusicFromPlaylist(Long playlistId, Long musicId) throws NotFoundException {
+        if(!musicRepository.existsById(musicId)){
+            throw new NotFoundException("Music doesn't exists!");
+        }
         repository.deleteMusicFromPlaylist(musicId, playlistId);
+
+        Playlist p = repository.findById(playlistId).orElseThrow(() -> new NotFoundException("Playlist doesn't exists!"));
+        List<Music> musicList = musicRepository.findAllById(repository.findMusicIdsByPlaylistId(musicId));
+
+        return mapper.toResponse(p, musicList);
     }
 
     @Transactional
     public PlaylistResponse updPlaylist(PlaylistRequest req, Long id) throws NotFoundException{
-        Playlist foundPlay = repository.findById(id).orElseThrow(() -> new NotFoundException("Playlist not found!", 404));
+        Playlist foundPlay = repository.findById(id).orElseThrow(() -> new NotFoundException("Playlist not found!"));
         Playlist playlist = mapper.toEntity(req);
 
         foundPlay.setTitle(playlist.getTitle());
@@ -73,12 +89,16 @@ public class PlaylistService {
     }
 
     public PlaylistResponse getPlaylistById(Long id) throws NotFoundException{
-        Playlist p = repository.findById(id).orElseThrow(() -> new NotFoundException("Playlist not found!", 404));
+        Playlist p = repository.findById(id).orElseThrow(() -> new NotFoundException("Playlist not found!"));
 
         List<Long> musicIds = repository.findMusicIdsByPlaylistId(p.getId());
         List<Music> musics = musicRepository.findAllById(musicIds);
 
         return mapper.toResponse(p, musics);
+    }
+
+    public List<PlaylistSummaryResponse> getPlaylistByName(String name) throws NotFoundException{
+        return mapper.toSumResponse(repository.findByTitle(name));
     }
 
     public HttpStatus delPlaylist(Long id){

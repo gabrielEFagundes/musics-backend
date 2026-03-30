@@ -24,6 +24,9 @@ public class User {
     @Column(name = "created_at")
     private LocalDate loginDate;
 
+    @Column(name = "profile_picture_url")
+    private String profilePictureUrl;
+
     public User(String name) {
         this.name = name;
     }
