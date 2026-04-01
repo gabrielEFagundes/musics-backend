@@ -20,6 +20,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String email;
+    private String password;
 
     @Column(name = "created_at")
     private LocalDate loginDate;
@@ -27,8 +29,10 @@ public class User {
     @Column(name = "profile_picture_url")
     private String profilePictureUrl;
 
-    public User(String name, String profilePictureUrl) {
+    public User(String name, String email, String password, String profilePictureUrl) {
         this.name = name;
+        this.email = email;
+        this.password = password;
         this.profilePictureUrl = profilePictureUrl;
     }
 }

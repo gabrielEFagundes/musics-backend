@@ -18,8 +18,8 @@ public class Artist extends User {
     private Long monthlyListeners;
     private String description;
 
-    public Artist(String name, String profilePictureUrl, String artisticName, Long monthlyListeners, String description) {
-        super(name, profilePictureUrl);
+    public Artist(String name, String email, String password, String profilePictureUrl, String artisticName, Long monthlyListeners, String description) {
+        super(name, email, password, profilePictureUrl);
         this.artisticName = artisticName;
         this.monthlyListeners = monthlyListeners;
         this.description = description;
